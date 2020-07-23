@@ -38,7 +38,7 @@ function App() {
             let newTasks = [newTask, ...tasks];
             setTasks(newTasks)
             alert(`Hi you added new task "${newTask.view}"`)
-        } else return lengthTasks()
+        } else lengthTasks()
 
     }
 

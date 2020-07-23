@@ -1,0 +1,23 @@
+.ul {
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+.li {
+    display: flex;
+
+}
+
+.span {
+    margin: 5px 10px;
+}
+
+.add_task {
+    display: flex;
+    width: 500px;
+    height: 40px;
+}
+
+.button_group {
+    display: flex;
+}

@@ -1,5 +1,10 @@
 import React, {useState, ChangeEvent, KeyboardEvent} from "react";
 import {FilterValuesType, TaskType} from "../App";
+import {Checkbox} from "./common/Checkbox/Checkbox";
+import s from "./TodoList.module.css"
+import {Button} from "./common/Button/Button";
+import {Input} from "./common/Input/Input";
+
 
 type TodoListPropsType = {
     title: string,
@@ -23,44 +28,61 @@ function TodoList(props: TodoListPropsType) {
     function onAddTaskKeyPressed(e: KeyboardEvent<HTMLInputElement>) {
         if (e.key === "Enter") {
             addTask()
-
-
         }
     }
 
     return (
         <div>
             <h3>{props.title}</h3>
-            <div>
-                <input
+            <div className={s.add_task}>
+                <Input
                     type="text"
                     value={taskName}
                     onChange={onTaskNameChanged}
                     onKeyPress={onAddTaskKeyPressed}
                 />
-                <button onClick={addTask}>+</button>
+                <Button
+                    onClick={addTask}
+                    text={"+"}/>
             </div>
-            <ul>
+            <ul className={s.ul}>
                 {props.tasks.map((t) => {
                     let removeTask = () => {
                         props.removeTask(t.id)
                     }
                     return (
-                        <li key={t.id}>
-                            <input type="checkbox" checked={t.isDone}/>
-                            <span>{t.view}</span>
-                            <button onClick={removeTask}>x</button>
+                        <li className={s.li} key={t.id}>
+                            <Checkbox
+                                checked={t.isDone}
+                                type="checkbox"
+                                id="cb1"
+                            />
+                            <span className={s.span}>{t.view}</span>
+                            <Button
+                                onClick={removeTask}
+                                text={"x"}
+                            />
                         </li>
 
                     )
                 })}
             </ul>
-            <div>
-                <button onClick={() => {props.changeFilter("all")}}>All</button>
-                <button onClick={() => {props.changeFilter("completed")}}>Completed</button>
-                <button onClick={() => {props.changeFilter("low")}}>Low</button>
-                <button onClick={() => {props.changeFilter("middle")}}>Middle</button>
-                <button onClick={() => {props.changeFilter("height")}}>Height</button>
+            <div className={s.button_group}>
+                <Button onClick={() => {
+                    props.changeFilter("all")
+                }} text={"All"}/>
+                <Button onClick={() => {
+                    props.changeFilter("completed")
+                }} text={"Completed"}/>
+                <Button onClick={() => {
+                    props.changeFilter("low")
+                }} text={"Low"}/>
+                <Button onClick={() => {
+                    props.changeFilter("middle")
+                }} text={"Middle"}/>
+                <Button onClick={() => {
+                    props.changeFilter("height")
+                }} text={"Height"}/>
             </div>
         </div>
     )
